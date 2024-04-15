@@ -1,0 +1,1135 @@
+
+
+###Do not change the code skeleton given.  Write code in the provided places alone.
+
+def select_archer(score_list):
+    ###Write your code here for creating score list and select archers with score as a list of dictionary and return the same.
+    player_scores=[]
+    print(score_list)
+    for player in score_list:
+        player_score={}
+        play=player.split(",")
+        ara_id=play[0]
+        score=[int(v) for v in play[1:]]
+        s=0
+        j=0
+        for v in score:
+            s+=v 
+            if(s<50):
+                j+=1
+            else:
+                j+=1
+                s+=v
+                break
+        if(s>=50):
+            print(f"j={j}")
+            main_score=score[0:j]
+            player_score[ara_id]=main_score
+            player_scores.append(dict(player_score))
+    '''for play_score in player_scores:
+      print(play_score)'''
+            
+    return player_scores ##TODO return appropriate object as per the problem description
+
+
+
+def extract_id(selected_list):
+    ###Write your code here for finding archers id's and return it as a list
+    players=[]
+    print(selected_list)
+    for player in selected_list:
+        for key in player:
+            if(len(player[key])==0):
+                continue
+            else:
+                players.append(key)
+    
+    
+    return players ##TODO return appropriate object as per the problem description
+  
+        
+
+
+def main():
+    archers_score=[]
+    no=int(input("Enter the no of archers:\n"))
+    print("Enter the archer id and 10 scores of round1 as comma separated values:\n")
+    for i in range(no):
+        archers_score.append(input())
+    select_list=select_archer(archers_score)
+    if(len(select_list)==0):
+        print("No one selected")
+        
+
+    ## Fill your code here for iterating the 'select list' for calling the extract_id method and displaying the archers ID's if there is any.
+    ## Else display appropriate message as per the problem description.
+    else:
+        id_list=extract_id(select_list)
+        for  value in id_list:
+            print(value)
+    
+    
+ 
+    return
+
+
+    
+if __name__=='__main__':
+    main() 
+
+
+mock question 4:vehicle_problem in mock
+
+import re
+def validate_customer_id(customer_list):
+  main_cust_list=[]
+  for tup in customer_list:
+    customer=list(tup)
+    if(customer[1][0:4]=='INS-' and len(customer[1])==7):
+      print(customer[1][0:4])
+      d=0
+      for i in customer[1][4:]:
+        if(i.isdigit()):
+          d+=1
+      print(d)
+      if(d==3):
+        main_cust_list.append(customer)
+    
+    '''if(re.match(r'^INS-\d{3}$',customer[1])):
+      main_cust_list.append(customer)'''
+
+    else:
+      continue
+  return main_cust_list
+  
+def calculate_total_amount(valid_customer_list,vehicle_type):
+    vehicle_dict=[]
+    vech_premium={}
+    total_amount=0
+    for cust in valid_customer_list:
+      #print(cust)
+      if(cust[3]==vehicle_type):
+        vech_premium[cust[2]]=cust[4]
+        total_amount+=int(cust[4])
+        
+      else:
+        continue
+    vehicle_dict.extend((vech_premium,total_amount))
+    #print(vehicle_dict)
+    return vehicle_dict
+
+
+
+def main():
+  print("enter no of customers: \n")
+  n=int(input())
+  customer_list=[]
+  for i in range(n):
+    tup=()
+    cust_str=input()
+    cust_name,cust_id,wheel_no,wheel_type,premimu_cost=cust_str.split(",")
+    tup=tup+(cust_name,cust_id,wheel_no,wheel_type,premimu_cost)
+    customer_list.append(tup)
+  cust_list=validate_customer_id(customer_list)
+  if(len(cust_list)==0):
+    print("No valid customer details found")
+    return
+  else:
+    print("Valid customer list: ")
+    for cust in cust_list:
+      print(cust)
+    vehicle_type=input("Enter the vehicle type: \n")
+    vechicle_dict=calculate_total_amount(cust_list,vehicle_type)
+    if(vechicle_dict !=None):
+      if (len(vechicle_dict[0])!=0):
+        print("Vehicle NO. Amount")
+        for key,value in vechicle_dict[0].items():
+          print(f"{key} {value}")
+        print(f"Total amount:{vechicle_dict[1]}")
+      else:
+        print("No vehicle found")
+
+ 
+
+if __name__=='__main__':
+    main() 
+ 
+
+
+mock question 5:alliterative
+# In main file
+# import script1
+
+def is_alliterative(sentence):
+  sentence_list=sentence.split(" ")
+  #print(sentence_list)
+  if(len(sentence_list)<2):
+    return False
+  else:
+    word_start_letter=[]
+    
+    for word in sentence_list:
+      word_start_letter.append(word[0].lower())
+    for i in range(len(word_start_letter)):
+      if(word_start_letter[i] in ('a','e','i','o','u','A','E','I','O','U')):
+        return False
+      elif(word_start_letter[i] not in ('a','e','i','o','u','A','E','I','O','U')):
+        x=word_start_letter.count(word_start_letter[0])
+        print(f"x:{x}")
+        if(x==len(word_start_letter)):
+          return True
+        else:
+          return False
+      
+def main():
+  sentence=input("Enter the sentence to be validated for alteration: \n")
+  option=is_alliterative(sentence)
+  if(option):
+    print("The sentence is alliterative")
+  else:
+    print("The sentence is not alliterative")
+  
+
+if __name__=='__main__':
+  main()
+-----------------------------------------------------------------------------------------------------------------
+
+questin 6:relationship
+# In main file
+# import script2
+def find_relationship(n1,n2):
+  name1=n1.replace(" ","")
+  name2=n2.replace(" ","")
+  full_name=name1+name2
+  len_name=len(full_name)
+  #print(len_name)
+  relation_dict={'0':'Solumates','1':'Colleagues','2':'Friends',
+                 '3':'Good friends','4':'Best friends','5':'Close friends'}
+  for key in relation_dict:
+    if((len_name%6)==int(key)):
+      return relation_dict[key]
+      break
+
+
+def main():
+  name1=input("Enter the name 1: \n")
+  name2=input("Enter the name 2: \n")
+  relation=find_relationship(name1,name2)
+  print(relation)
+  
+ 
+main()
+--------------------------------------------------------------------------------------
+
+question 7:sentence is palindrome
+# In main file
+# import script2
+import re
+def is_palindrome(sentence):
+  sentence_list=re.split('[, " " ! ? @ % & * ^ # $]',sentence)
+  #print(sentence_list)
+  main_sentence_list=[x for x in sentence_list if x]#remove space after split
+  #print(main_sentence_list)
+  #count=0
+
+  '''
+  for word in sentence_list:
+    if word.isalpha():
+      rword=[i for i in word]
+      rword.reverse()
+      #print(rword)
+      reverse_word="".join(rword)
+      #print(reverse_word)
+      if(word==reverse_word):
+        count+=1
+      '''
+  #if(count==len(main_sentence_list)):
+  main_sentence="".join(main_sentence_list)#
+  main_sentence_list.reverse()#reversing string list
+  print(main_sentence)
+  reverse_sentence="".join(main_sentence_list)#convert reversed list into sentence
+  if(main_sentence==reverse_sentence):#compare normal sentence with reversed sentence
+    #print('yes')
+    return True
+  return False
+ 
+
+def main():
+  sentence=input("Enter the sentence: \n")
+  option=is_palindrome(sentence)
+  if(option):
+    print(f"{sentence} is a palindrome.")
+  else:
+    print(f"{sentence} is not a palindrome.")
+ 
+main()
+-------------------------------------------------------------------------------------
+
+
+question 8:bp_level
+# In main file
+# import script1
+
+def generate_status(BP_level):
+  s,d=BP_level.split("/")
+  systolic=int(s)
+  diastolic=int(d)
+  if(systolic<90 and diastolic<60):
+    return 'Low BP'
+  elif((systolic>=90 and systolic<=120)and (diastolic>=60 and diastolic<=80)):
+    return 'Normal'
+  elif((systolic>=121 and systolic<=140)and(diastolic>=81 and diastolic<=90)):
+    return 'Pre-High BP'
+  elif((systolic>=141 and systolic<=190)and(diastolic>=91 and diastolic<=100)):
+    return 'High BP'
+  elif(systolic>190 and diastolic>100):
+    return 'Hyper Tension'
+  else:
+    return 'Invalid Input'
+
+
+def main():
+  BP_level=input("Enter the BP level: \n")
+  status=generate_status(BP_level)
+  print(status)
+
+main()
+
+------------------------------------------------------------------------------------------------
+question 9:lucky_number
+def find_lucky_number(date_of_birth):
+  day=date_of_birth[0]+date_of_birth[1]
+  month=date_of_birth[3]+date_of_birth[4]
+  year=date_of_birth[6:]
+  #print(dob_list)
+  if((int(day)>=1 and int(day)<=31) and 
+      date_of_birth[2]=="/" and (int(month)>=1 and int(month)<=12 ) and
+      date_of_birth[5]=="/" and int(year)<=2023):
+    dob_list=list(map(int,date_of_birth.split('/')))
+    #if((dob_list[0]>=1 and dob_list[0]<=31) and (dob_list[1]>=1 and dob_list[1]<=12)and(dob_list[2]<=2023)):
+    sum_digits=str(sum(dob_list))
+    lucky_number=0
+    for d in sum_digits:
+      lucky_number+=int(d)
+    return lucky_number 
+  else:
+    return 'Invalid formate'
+    
+  
+def main():
+  date_of_birth=input()
+  lucky_number=find_lucky_number(date_of_birth)
+  print(lucky_number)
+main()
+---------------------------------------------------------------------------------------------------------
+
+question10:product_code generater
+# In main file
+# import script1
+def generate_code(manufacter_details):
+  product=[]
+  mf_d=manufacter_details.split(":")
+  #print(mf_d)
+  if(len(mf_d[0])>3 and len(mf_d[1])>3 and (int(mf_d[2])>=1 and int(mf_d[2])<=12)and(len(mf_d[3])==4)):
+    len_pname=len(mf_d[0])
+    if(len_pname%2!=0):
+      pn=mf_d[0][:3]
+      product_name=pn.upper()
+      #print(product_name)
+    elif(len_pname%2==0):
+      pn=mf_d[0][-3:]
+      product_name=pn.upper()
+      #print(product_name)
+    dest=mf_d[1][0]+mf_d[1][len(mf_d[1])-1]
+    #print(dest)
+    destination=dest.upper()
+    #print(destination)
+    month_year=mf_d[2]+mf_d[3][-2:]
+    #print(month_year)
+    product.extend((product_name,destination,month_year))
+    product_code="/".join(product)
+    #print(product_code)
+  else:
+    return 'Invalid product details'
+  return product_code  
+def main():
+  mf=input("Enter the details: \n")
+  string=generate_code(mf)
+  print(string)
+main()
+
+----------------------------------------------------------------------------------------------------------------
+question 11:replace the word
+# In main file
+# import script1
+import re
+def replace_word(s,w):
+  sent=re.split('[" ". ! @ #]',s)
+  sentence=[x for x in sent if x]
+  #print(sentence)
+#check wethere no word is present
+  lower_case_sentence=[x.lower() for x in sentence]
+  c=lower_case_sentence.count(w)
+  #print(c)
+  if(c==0):
+    return 'The given word is not found in the sentence'
+#replace word with * values  
+  for i in range(len(sentence)):
+    if sentence[i].lower()==w:
+       len_word=len(sentence[i])
+       replace_letter='*'
+       replace_word=replace_letter*len_word
+       #print(replace_word)
+       sentence[i]=replace_word
+  #print(sentence)
+  modifed_sentence=" ".join(sentence)
+  #print(modifed_sentence) 
+  return modifed_sentence
+   
+def main():
+    sentence=input("Enter the sentence: \n")
+    word=input("Enter the word: \n")
+    output=replace_word(sentence,word)
+    print(output)
+
+main()
+---------------------------------------------------------------------------------------------------
+question 11:secret_key
+import re
+def generate_secret_key(name):
+  len_name=len(name)
+  if((len_name>=2 and len_name<=10) and (re.match(r'[a-z A-z]$',name))):
+   sum=0
+   for i in name.lower():
+     sum+=ord(i)
+   avg_value=sum//(len_name)
+   #print(avg_value)
+   return chr(avg_value)
+  else:
+    return 'Invalid Input'
+     
+
+def main():
+    name =input("Enter the name: \n")
+    secret_key=generate_secret_key(name)
+    print(secret_key)
+  
+main()
+----------------------------------------------------------------------------------------------------
+QUESTION 12:Trainer ratings
+# In main file
+# import script1
+def create_ratings(td):
+    list_td=td.split(',')
+    trainer_dict={}
+    for i in list_td:
+      key,value=i.split(':')
+      trainer_dict[key]=int(value)
+    #print(trainer_dict)
+    return trainer_dict
+
+def count_ratings(trainer_list):
+  main_list=[]
+  list1=[]
+  list2=[]
+  for key,value in trainer_list.items():
+    if(value>=0 and value<=5):
+      list1.append(key)
+    else:
+      list2.append(key)
+  main_list.extend((list1,list2))
+  #print(main_list)
+  return main_list
+      
+def main():
+  trainer_details=input("Enter the ratings(as comma-separated values): \n")
+  trainer_rating_list=create_ratings(trainer_details)
+  trainers_list=count_ratings(trainer_rating_list)
+  if(len(trainers_list[0])==0):
+    print(f"The list of trainers with ratings between 0-5:Nil\n")
+  else:
+    print(f"The list of trainers with ratings between 0-5:{trainers_list[0]}\n")
+  if(len(trainers_list[1])==0):
+    print(f"The list of trainers with rating between 6 and above:Nil\n")
+  else:
+    print(f"The list of trainers with rating between 6 and above:{trainers_list[1]}\n")
+   
+main()
+
+----------------------------------------------------------------------------------------------------------
+question:Filter participants
+
+# In main file
+# import script2
+def calculate_score(pl):
+  participant_marks={}
+  for i in pl:
+    each_participant=i.split(":")
+    each_participant_marks=[int(j) for j in each_participant[1:]]
+    participant_marks[each_participant[0]]=each_participant_marks
+  #print(participant_marks)
+  avg_participants_marks_list={}
+  for key,value in participant_marks.items():
+    len_marks=len(value)
+    sum_marks=sum(value)
+    #print(sum_marks)
+    each_participant_avg_marks=round(sum_marks/len_marks,1)
+    avg_participants_marks_list[key]=each_participant_avg_marks
+  #print(avg_participants_marks_list)
+  return avg_participants_marks_list
+
+def Filter_participants(apml,pm):
+  passed_list=[]
+  for key,value in apml.items():
+    if(value>=pm):
+      passed_list.append(key)
+  #print(passed_list)
+  return passed_list
+    
+def main():
+  n=int(input())
+  pl=[ input() for i in range(n)]
+  avg_participants_marks_list=calculate_score(pl)
+  pass_marks=int(input("Enter the pass score to select next level: \n"))
+  passed_participants_list=Filter_participants(avg_participants_marks_list,pass_marks)
+  print("Next level selected participants are:")
+  if(len(passed_participants_list)==0):
+    print("No one selected")
+  else:
+    for i in passed_participants_list:
+      print(i)
+    
+main()
+
+------------------------------------------------------------------------------------------------
+Question :Room Rent
+
+def calculate_days(fd,td):
+  fd_day,fd_month=map(int,fd.split("/"))
+  td_day,td_month=map(int,td.split("/"))
+  #days=0
+  #print(type(days))
+  if(fd_month==td_month):
+    days=td_day-fd_day
+    #print(days)
+  elif(fd_month!=td_month):
+    days_per_month=30
+    #fd_days=m-fd_day
+    #print(fd_days)
+    months=td_month-fd_month
+    #print(months)
+    days=(days_per_month-fd_day)+(months-1)*days_per_month+td_day
+    #print(days)
+  return days
+    
+
+def calculate_total_amount(cust_name,room_type,no_of_days):
+  cust_stay_details={'Customer Name':cust_name,'No of days':no_of_days,'Total amount':0}
+  #print(cust_stay_details)
+  if(room_type=='Single'):
+    single_room_per_day=3300
+    
+    if(no_of_days<=3):
+      single_discount=0.1 
+      cost=no_of_days*single_room_per_day
+      single_room_cost=cost-(cost*single_discount)
+      cust_stay_details['Total amount']=single_room_cost
+      
+    elif(no_of_days>3):
+      single_discount=0.15
+      cost=no_of_days*single_room_per_day
+      single_room_cost=cost-(cost*single_discount)
+      cust_stay_details['Total amount']=single_room_cost
+      
+  if(room_type=='Double'):
+    double_room_per_day=4000
+    
+    if(no_of_days<=3):
+      double_discount=0.1
+      cost=no_of_days*double_room_per_day
+      double_room_cost=cost-(cost*double_discount)
+      cust_stay_details['Total amount']=double_room_cost
+      
+    elif(no_of_days>3):
+      double_discount=0.17
+      cost=no_of_days*double_room_per_day
+      double_room_cost=cost-(cost*double_discount)
+      cust_stay_details['Total amount']=double_room_cost
+      
+  if(room_type=='Triple'):
+    triple_room_per_day=4500
+    
+    if(no_of_days<=3):
+      triple_discount=0.1 
+      cost=no_of_days*triple_room_per_day
+      triple_room_cost=cost-(cost*triple_discount)
+      cust_stay_details['Total amount']=triple_room_cost
+      
+    elif(no_of_days>3):
+      triple_discount=0.2
+      cost=no_of_days*triple_room_per_day
+      triple_room_cost=cost-(cost*triple_discount)
+      cust_stay_details['Total amount']=triple_room_cost
+  #print(cust_stay_details)
+  return cust_stay_details
+
+def main():
+  cust_details=input()
+  room_number,cust_name,room_type,from_date,to_date=cust_details.split(":")
+  no_of_days=calculate_days(from_date,to_date)
+  #print(type(no_of_days))
+  customer_stay_details=calculate_total_amount(cust_name,room_type,no_of_days)
+  for key,value in customer_stay_details.items():
+    print(f"{key}: {value}")
+
+main()
+
+--------------------------------------------------------------------------------------------
+question:qualifed racers
+
+def calculate_time(list_racers):
+  racers_time_details=[]
+  distance=200
+  for i in list_racers:
+    id,name,speed=i.split(":")
+    time=round((distance/int(speed)),1)
+    #print(time)
+    racer={'Id':id,'Name':name,"Time":time}
+    racers_time_details.append(racer)
+  print(racers_time_details)
+  return racers_time_details
+    
+def find_qualifiers(rtd,tq):
+  list_selected_racers=[]
+  for i in rtd:
+    if(i['Time']<=tq):
+      list_selected_racers.append(i['Name'])
+  #print(list_selected_racers)
+  return list_selected_racers
+
+def main():
+  no_of_racers=int(input())
+  list_racers=[input() for i in range(no_of_racers)]
+  #print(list_racers)
+  racers_time_details=calculate_time(list_racers)
+  time_to_qualify=float(input())
+  list_of_qualified_racers=find_qualifiers(racers_time_details,time_to_qualify)
+  print("The qualified participants are: ")
+  if(len(list_of_qualified_racers)==0):
+    print("No one is qualified")
+  else:
+    for i in list_of_qualified_racers:
+     print(f"{i}")
+
+main()
+--------------------------------------------------------------------------------------------------------------
+Question:Deducing blood group
+
+def create_list(factors):
+  list_options=factors.split(",")
+  print(list_options)
+  return list_options
+
+def deduce_blood_group(blood_details):
+  
+  if(blood_details[0]=='y'   and blood_details[3]=='y' and blood_details[4]=='+'):
+    return 'A+' 
+  elif(blood_details[1]=='y' and blood_details[2]=='y' and blood_details[4]=='+'):
+    return 'B+'
+  elif(blood_details[0]=='y' and blood_details[1]=='y' and blood_details[4]=='+'):
+    return 'AB+'
+  elif(blood_details[2]=='y' and blood_details[3]=='y' and blood_details[4]=='+'):
+    return 'O+'
+  elif(blood_details[0]=='y' and blood_details[3]=='y' and blood_details[4]=='-'):
+    return 'A-'
+  elif(blood_details[1]=='y' and blood_details[2]=='y' and blood_details[4]=='-'):
+    return 'B-'
+  elif(blood_details[0]=='y' and blood_details[1]=='y' and blood_details[4]=='-'):
+    return 'AB-'
+  elif(blood_details[2]=='y' and blood_details[3]=='y' and blood_details[4]=='-'):
+    return 'O-'
+  else:
+    return False
+    
+def main():
+  n=input("Enter y/n for A antigens,y/n for B antigens,y/n for anti-A antibodies,y/n for anti-B antibodies,and +/-for Rh factor(as comma separated values): \n")
+  list_options=create_list(n)
+  option=deduce_blood_group(list_options)
+  if(option):
+    print(f"Deduced blood group: {option}")
+  else:
+    print("Incorrect combination of antigens/antibodies entry")
+    
+
+main()
+-----------------------------------------------------------------------------------------------------------------------
+Question:cricket Academc
+def create_player(p_id,p_name,p_matches,p_runs):
+  player_details={'Id':p_id,'Name':p_name,'Matches_Played':p_matches,'Runs_Scored':p_runs}
+  return player_details
+
+def display_player(players_list):
+  if(len(players_list)==0):
+    print("No player details found")
+    return
+  else:
+    c=0
+    for i in players_list:
+      if(i['Runs_Scored']>100):
+        c=1
+        for key,value in i.items():
+          print(f"{key}: {value}")
+    if(c==0):
+      print("No player details found")
+      return
+def main():
+  print("1. Create Player")
+  print("2. Display Player details")
+  print("3. Exit")
+  n=input("Enter the option: \n")
+  players_list=[]
+  while(n):
+    if(n=='1'):
+      p_id=input("Player id: \n")
+      p_name=input("Player name: \n")
+      p_matches=int(input("Matches played: \n"))
+      p_runs=int(input("Runs scored: \n"))
+      each_player_details=create_player(p_id,p_name,p_matches,p_runs)
+      players_list.append(each_player_details)
+      print(players_list)
+    elif(n=='2'):
+       display_player(players_list)
+    elif(n=='3'):
+      #players_list.clear()
+      print("Thank you")
+      return
+    n=input("Enter the option: \n"
+main()
+--------------------------------------------------------------------------------
+Question :Game event
+
+from collections import Counter
+
+def find_each_round_winner(t1,t2):
+  result_list=[ 'equal'  if v1==v2 else 'Team2' if v1<v2 else 'Team1' for v1,v2 in zip(t1,t2)]
+  return result_list
+
+def count_winners(result_list):
+  '''
+  win_list=Counter(result_list)
+  #print(win_list)
+  rounds_win_list={k:win_list[k] for k in sorted(win_list)}
+  print(type(rounds_win_list))
+  print(rounds_win_list)
+  
+
+  win_list={i: result_list.count(i) for i in set(result_list)}
+  rounds_win_list={k:win_list[k] for k in sorted(win_list)}
+  #print(rounds_win_list)
+  '''
+  print(result_list)
+  final_win_list={'Team1':0,'Team2':0,'Equal':0}
+  
+  for i in result_list:
+    if(i=='Team1'):
+      final_win_list['Team1']+=1 
+    elif(i=='Team2'):
+      final_win_list['Team2']+=1 
+    elif(i=='Equal'):
+      final_win_list['Equal']+=1
+
+  return final_win_list
+
+def main():
+  rounds=int(input("Enter the no of rounds: \n"))
+  
+  print("Enter the team1 points: \n")
+  team1=[int(input()) for i in range(rounds) ]
+  
+  print("Enter the team2 points: \n")
+  team2=[int(input()) for i in range(rounds) ]
+  
+  result_list=find_each_round_winner(team1,team2)
+  #print(result_list)
+  rounds_win_list=count_winners(result_list)
+  #print(rounds_win_list)
+  for key,value in rounds_win_list.items():
+      print(f"{key}: {value}")
+  
+main()  
+-------------------------------------------------------------------------------------------------------------------------------
+Question :Task Manager
+
+def add_task(task,todo_list):
+  todo_list.append(task)
+  return todo_list
+
+def mark_task_complete(index,todo_list):
+  if(len(todo_list)==0 or index>len(todo_list)):
+    return -1
+    print("Invalid input")
+  else:
+    todo_list.remove(todo_list[index])
+    print(todo_list)
+    return todo_list
+ 
+  
+def main():
+  option=input("Enter a command (1 to add a task,2 to mark a task complete,3 to quit): \n")
+  todo_list=[]
+  while(option):
+    
+    if(option=='1'):
+      task=input("Enter the task to add: \n")
+      task_list=add_task(task,todo_list)
+      #print(task_list)
+    elif(option=='2'):
+      index=int(input("Enter the index of the task to mark as complete: \n"))
+      modified_task_list=mark_task_complete(index,todo_list)
+      if(modified_task_list):
+        print("Invalid input")
+      else:
+        for i in modified_task_list_:
+          print(f"{i}")
+    elif(option=='3'):
+      break
+    else:
+      print("Invalid command")
+      break
+    option=input("Enter a command (1 to add a task,2 to mark a task complete,3 to quit): \n")
+    
+
+main()
+
+------------------------------------------------------------------------------------------------------------------
+question:Immunization Record
+
+def create_record(childer_list):
+  childrens_details=[]
+  for i in childer_list:
+    name,gender,w,contact=i.split(":")
+    weeks=int(w)
+    if(weeks>=1 and weeks<=24):
+      each_children_details={'Name':name,'Gender':gender,'Weeks':weeks,'Contact':contact}
+      childrens_details.append(each_children_details)
+    else:
+      continue
+  #print(childrens_details)
+  return childrens_details
+  
+
+def display_records(valid_records,weeks):
+  c=0
+  for i in valid_records:
+    if(i['Weeks']<=weeks):
+      c+=1
+      print(f'Record {c} :')
+      for key,value in i.items():
+        print(f'{key}: {value}')
+  if(c==0):
+    print(f"No child under {weeks} weeks has booked for the vaccination")
+  elif(c==1):
+    print(f"There is 1 child under {weeks} weeks who have booked for the vaccination")
+  else:
+    print(f"There are {c} children under {weeks} who have booked for the vaccination")
+
+
+def main():
+  no_of_childrens=int(input("Enter the no of children: \n"))
+  print("Enter name,gender,weeks,and contact as colon-separated values: \n")
+  children_list=[input() for i in range(no_of_childrens)]
+  children_details=create_record(children_list)
+  if(len(children_details)==0):
+    print("No records available")
+    return
+  week=int(input("To display the records based on weeks since birth-Enter the no of weeks(<=24): \n "))
+  display_records(children_details,week)
+
+
+main()
+select c.cust_name,count(r.order_id) as No_of_Cakes
+from customers c
+join orders o
+using(cust_id)
+group by cus_id
+having count(r.order_id)>2
+order by c.cust_name desc
+
+---------------------------------------------------------------------------------------------------------------------------------
+Question :Predict Disease Probability
+
+def compute_risk_score(pd):
+  factor_risk=0
+  #age
+  if(pd[0]>60):
+    factor_risk+=10
+  elif(pd[0]<=60):
+    factor_risk+=5
+  #gender
+  if(pd[1]=='M'):
+    factor_risk+=5
+  elif(pd[1]=='F'):
+    factor_risk+=3
+  #BP level
+  if(pd[2]>120):
+    factor_risk+=10 
+  elif(pd[2]<=120):
+    factor_risk+=5
+  #cholesterol level
+  if(pd[3]>200):
+    factor_risk+=15
+  elif(pd[3]<=200):
+    factor_risk+=10
+  
+  return factor_risk
+   
+def predict_probability(rs):
+   probability=round((1-(1/(1+rs))),2)
+   #print(probability)
+   return probability
+
+def main():
+  pd=input("Enter the patient data\n")
+  patient_data=[]
+  age,gender,bp,cl=pd.split(":")
+  patient_data.extend((int(age),gender,int(bp),int(cl)))
+  #print(patient_data)
+  risk_score=compute_risk_score(patient_data)
+  #print(risk_score)
+  probability=predict_probability(risk_score)
+  print(f"The probability of the patient developing the disease is {probability}")
+  
+main()
+--------------------------------------------------------------------------------------------------------------------------------
+Question :Analyze comments
+
+n="User1:i love this post!\\nUser2:This is a great post!\\nUser3:Itotally agree with user1\\nuser4:This is a post"
+#print(n)
+sen=''
+for i in n:
+  if(i=="\" "):
+    continue
+  else:
+    if(i==":" or i=="\n" or i=="\\"):
+      sen+=i
+    elif(i.isalnum()):
+      sen+=i 
+    else:
+      sen+=i 
+print(sen)
+sentences=sen.split("\\n")
+print(sentences)
+
+k='["love","greate","amazing"]'
+key=''
+for i in k:
+  if(i=="\'" or i=="[" or i=="]" or i=="\""):
+    continue
+  elif(i.isalpha()):
+    key+=i 
+  else:
+    key+=i
+print(key)
+keyword=key.split(",")
+print(keyword)
+
+
+def analyze_comments(s,keywords):
+  sentences=s.split("\n")
+  #print(sentences)
+  for i in sentences:
+    user,comment=i.split(":")
+    for j in keywords:
+      if j in comment:
+        print(comment)
+
+def main():
+  s=input()
+  keywords=['love','great','amazing']
+  analyze_comments(s,keywords)
+main()
+
+def analyze_comments(s,keywords):
+  sentences=s.split("\n")
+  print(sentences)
+  for i in sentences:
+    user,comment=i.split(":")
+    for j in keywords:
+      if j in comment:
+        print(comment)
+
+def main():
+  s=input()
+  keywords=['python','output','example']
+  analyze_comments(s,keywords)
+main()
+-------------------------------------------------------------------------------------------------------------------
+Question:parking details
+
+def validate_license_number(vd):
+  if(len(vd[2])==15):
+    if(vd[2][:2]=='AA' and vd[2][2:4]=='99' and (int(vd[2][4:8])>=1990 and int(vd[2][4:8])<=2022)):
+      return True
+  return False
+
+
+def generate_parking_id(vd):
+  
+  if(vd[3]=='Two wheeler'):
+    parking_id='A'+str(sum(map(int,vd[2][-7:])))+vd[1][0:1]
+    #print(parking_id)
+    cost_tw=float(int(vd[4])*20)
+    parking_details={'Name':vd[1],'Parking Id':parking_id,'Amount':cost_tw}
+  elif(vd[3]=='Four wheeler'):
+    parking_id='B'+str(sum(map(int,vd[2][-7:])))+vd[1][0:1] 
+    cost_fw=float(int(vd[4])*30)
+    parking_details={'Name':vd[1],'Parking Id':parking_id,'Amount':cost_fw}
+  return parking_details
+  
+  
+def main():
+  details=input()
+  vehicle_details=details.split(',')
+  #print(vehicle_details)
+  if(validate_license_number(vehicle_details)):
+    park_details=generate_parking_id(vehicle_details)
+    print(park_details)
+  else:
+    print('Invalid input')
+
+main()
+--------------------------------------------------------------------------------------------------------------------
+Question :Ugly number
+def is_ugly(nl):
+  #print(nl)
+  ugly_number=[]
+  for i in nl:
+    temp=i
+    c=0
+    while i!=1:
+      if(i%2==0):
+        i/=2
+      elif(i%3==0):
+        i/=3
+      elif(i%5==0):
+        i/=5
+      else:
+        c=1
+        break
+    if(c==0):
+      ugly_number.append(temp)
+  #print(ugly_number)
+  return ugly_number
+      
+def main():
+  n=input("Enterv the number(as-comma-separated values): \n")
+  num_list=list(map(int,n.split(",")))
+  ugly_list=is_ugly(num_list)
+  if(len(ugly_list)==0):
+    print("No ugly numbers found")
+  else:
+    for i in ugly_list:
+      print(i)
+
+main()
+----------------------------------------------------------------------------------------------------------------------------
+Question:cashback
+def calculate_amount(cpl):
+  amount=0
+  for i in cpl:
+    if(i>0):
+      if(i<30):
+        amount+=(1*i)
+      elif(i>=30 and i<50):
+        amount+=(2*i)
+      elif(i>=50):
+        amount+=(5*i)
+  #print(amount)
+  return amount
+
+
+def main():
+  n= int(input("Enter the no. of travel credit card users:\n"))
+  credit_point_list=[ int(input("Enter the credit points for user:\n")) for i in range(n)]
+  cashback_amount=calculate_amount(credit_point_list)
+  print(f"Total cash-back amount:{cashback_amount}")
+main()
+--------------------------------------------------------------------------------------------------------------------------------
+Question :Flat discount
+
+def calculate_discount(Input_String):
+  house_number,house_type=Input_String.split(":")
+  flat_number=sum([int(x) for x in house_number])
+  #print(flat_number)
+  discount=0
+  if(house_type=='2BHK' and flat_number%2==0):
+    discount=500000*0.05
+  elif(house_type=='3BHK' and flat_number%2==1):
+    discount=650000*0.07
+  elif(house_type=='3BHK' and flat_number%2==0):
+    discount=760000*0.06
+  return discount
+
+
+def main():
+  n=input("Enter the details: \n")
+  print(f"{calculate_discount(n)}")
+-----------------------------------------------------------------------------------------------------------------------
+Question:Scholarship
+
+
+def check_scholarships(student_id,scholar_students):
+  sid=list(map(int,student_id.split(",")))
+  ss=list(map(int,scholar_students.split(",")))
+  #print(sid)
+  #print(ss)
+  no_scholarship=[]
+  if(len(sid)<len(ss)):
+    return 'Inavlid data'
+  else:
+    for i in sid:
+      if i not in ss:
+        no_scholarship.append(i)
+  #print(no_scholarship)
+  return no_scholarship
+
+def main():
+  student_id=input()
+  scholar_students=input()
+  list_no_scholarship=check_scholarships(student_id,scholar_students)
+  if(list_no_scholarship=='Inavlid data'):
+    print("Invalid data")
+  else:
+    if(len(list_no_scholarship)==0):
+      print("All students have scholarship")
+    else:
+      print(f"Students without scholarships: ",end=" ")
+      for i in range(len(list_no_scholarship)):
+        if(i!=len(list_no_scholarship)-1):
+          print(list_no_scholarship[i],end=",")
+        else:
+          print(list_no_scholarship[i])
+
+main()
+----------------------------------------------------------------------------------------------------------------
+Question:Dan's scorecard
+
+def calculate_score(score_values):
+  avg_score=sum(score_values)/len(score_values)
+  print(avg_score)
+  avg_score_50=avg_score*0.5
+  print(avg_score_50)
+  c=0
+  for i in score_values:
+    if(i>=avg_score_50):
+      c+=1
+  return c
+  
+
+def main():
+  size_of_scorecard=int(input())
+  score_values=[ float(input()) for i in range(size_of_scorecard)]
+  value=calculate_score(score_values)
+  print(f"The score values that are equal to or above 50% of the average score:{value}")
+  
+main()
