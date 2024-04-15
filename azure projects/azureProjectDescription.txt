@@ -1,0 +1,14 @@
+Azure Data Factory Capstone-Covid Use Case
+- Successfully set up an Azure Data Lake Storage account to store large volumes of data securely.
+- Created a container within the storage account to organize and manage data efficiently.
+- Uploaded relevant files into the designated container within Azure Data Lake Storage.
+- Demonstrated proficiency in managing data within the storage account.
+- Created an Azure Synapse workspace, providing an integrated environment for big data and analytics.
+- Configured a dedicated pool within Synapse to handle data processing and querying.
+- Designed and defined necessary tables within the dedicated pool to structure the data.
+- Ensured proper schema and data types for efficient querying.
+- Developed a Azure Data Factory (ADF) pipeline to orchestrate data movement from Azure Data Lake Storage to Azure Synapse dedicated pool.
+- Utilized ADF activities such as Copy to efficiently load files into Synapse.
+- Leveraged SQL queries within Synapse to extract meaningful insights from the loaded data.
+- Gained practical knowledge of Azure services, including Data Lake Storage, Synapse, and Data Factory.
+- Collaborated with team members to ensure successful project execution.
